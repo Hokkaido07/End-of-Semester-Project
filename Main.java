@@ -7,7 +7,6 @@
  * the player along on a journey while learning the importance of using ciphers in real world situations.
  */
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class Main {
-    /**
-     * Declaring all ANSI color codes
-     */
+
+    //Declaring all ANSI color codes
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -40,8 +39,10 @@ public class Main {
         determineIntention();
     }
 
-
-    public static void introToProgram() { //Introduces the Program
+    /**
+     * Introduces the Program
+     */
+    public static void introToProgram() {
         System.out.println(ANSI_BLUE + ANSI_BOLD +
                 "  _  _     _   _        _    _     _       ___ _      _            \n" +
                 " | || |___| |_| |____ _(_)__| |___( )___  / __(_)_ __| |_  ___ _ _ \n" +
@@ -52,7 +53,10 @@ public class Main {
         getStringInput("Would you like to start the program? If so, press" + ANSI_RED + ANSI_BOLD + " Enter" + ANSI_RESET);
     }
 
-    public static void determineIntention() { //Determines what the user would like to do in this program
+    /**
+     * Determines what the user would like to do in this program
+     */
+    public static void determineIntention() {
         int intention = getIntInput("What would you like to do in this program today?\n" +
                 "If you would like to encrypt a word or decipher a word, press" + ANSI_CYAN + " 1\n" + ANSI_RESET +
                 "If you would like to play the game, press" + ANSI_PURPLE + " 2" + ANSI_RESET +
@@ -111,7 +115,6 @@ public class Main {
      */
 
     public static String encryptingTheWord(String input) {
-        String[] alphabetGroups = {"abc", "def", "ghi", "jkl", "mno", "pqr", "stu", "vwx", "yz"};
         String codeword = "snowflake";
 
         String encryptedWord = "";
@@ -128,7 +131,6 @@ public class Main {
         }
 
         return encryptedWord;
-
     }
 
     /**
@@ -153,9 +155,12 @@ public class Main {
         }
 
         return decryptedWord;
-
     }
 
+    /**
+     * Load words from the inappropriateWords file into a list of strings
+     * @return list of inappropriate words
+     */
     public static List<String> loadInappropriateWords() { //Load words from the inappropriateWords file into a list of strings
         List<String> inappropriateWords = new ArrayList<>();
 
@@ -171,7 +176,6 @@ public class Main {
         return inappropriateWords;
     }
 
-
     /**
      * these are the methods which will be used for the encrypt and decipher modes
      */
@@ -185,10 +189,8 @@ public class Main {
             encryptOrDecipher();
         } else {
             modeTwo();
-
         }
     }
-
 
     public static void encryptOrDecipher() { //Asks the user if they would like to encrypt or decipher
         int input = getIntInput("\nWould you like to encrypt or decipher a word? If you would like to encrypt, press " + ANSI_GREEN + "1." + ANSI_RESET + " If you would like to decipher, press " + ANSI_YELLOW + "2." + ANSI_RESET);
@@ -204,7 +206,9 @@ public class Main {
         }
     }
 
-
+    /**
+     * Encrypts a word and checks for any errors
+     */
     public static void doEncrypt() {
         String encryptInput = getInputEncrypt();
         while (!checkValid(encryptInput)) {
@@ -219,6 +223,9 @@ public class Main {
         }
     }
 
+    /**
+     * Deciphers a word and checks for any errors
+     */
     public static void doDecipher() {
         String decipherInput = getDecipherEncrypt();
         System.out.println(decipheringTheWord(decipherInput));
@@ -230,13 +237,20 @@ public class Main {
         }
     }
 
-
-    public static String getInputEncrypt() { //asks for user input for encrypting
+    /**
+     * asks for user input for encrypting
+     * @return integer input for encrypting
+     */
+    public static String getInputEncrypt() {
         return getStringInput("Enter a word you would like to encrypt, please do not enter any numbers or special characters: ");
     }
 
-    public static String getDecipherEncrypt() { //asks for user input for deciphering
-        return getStringInput("Enter a word you would like to decipher, please do not enter any numbers or special characters: ");
+    /**
+     * asks for user input for deciphering
+     * @return string input for encrypting
+     */
+    public static String getDecipherEncrypt() {
+        return getStringInput("Enter a word you would like to decipher: ");
     }
 
     /**
@@ -268,12 +282,11 @@ public class Main {
         return !inappropriateWords.contains(wordToCheck);
     }
 
-
     /**
      * these are the methods which will be used for the game
      */
 
-    public static void modeTwo() { //This method runs the 2nd mode - game mode
+    public static void modeTwo() {
         if (getIntInput("\nYou have chosen to play the game. To confirm, press " + ANSI_CYAN + "1." + ANSI_RESET + " If you would like to change to the encrypt/decipher mode, press " + ANSI_PURPLE + "2." + ANSI_RESET) == 2) {
             modeOne();
         }
@@ -321,13 +334,13 @@ public class Main {
         System.out.println("Hello " + ANSI_CYAN + username + ANSI_RESET + ", welcome to my space ship! My name is Hokkaido, I'm the AI controlling this space ship, its nice to have you onboard.\n" +
                 "Let me tell you something about this ship: everything on this ship is encrypted in a special code called \"Hokkaido's Cipher\". Ciphers are simply secret codes. You take a message and transform it using specific rules or patterns to make it look like gibberish. Then, only the people who knows the specific rules or patterns can decode the message. This is used" +
                 "to help me keep the information on this ship safe, only the people who know the code word would be able to get into the system and understand how to get past the security barriers.");
-        delayPrint();
+        waitOneSecond();
         System.out.println("It seems that you are an experienced coder, I might need help on this ship someday, I think you will be a good fit! Here, I'll let you into the secret of this cipher. I'll let you know the secret of this cipher: " +
                 "The secret word of this cipher is: " + ANSI_BLUE + " snowflake" + ANSI_RESET + ". The cipher is very simple, every three letters of the refers to one character of the secret word. To know which of the three letter it equals from the group, the number 1 - 3 will be coded respectively" +
                 "\nFor example, the letters '" + ANSI_PURPLE + "a, b, c" + ANSI_RESET + "' are the first three letters of the alphabet. This would be encoded into the letter '" + ANSI_BLUE + "s1, s2, or s3" + ANSI_RESET + "' the first letter of the code word." +
                 "\nThen, the next three letters '" + ANSI_CYAN + "d, e, f" + ANSI_RESET + "' are encoded into the letter '" + ANSI_BLUE + "n1, n2, n3" + ANSI_RESET + "', the second letter of the code word." +
                 "\nIt goes on in the same pattern, every three letters is one letter from the code word! There is one exception, which is the last group of letters in the alphabet, '" + ANSI_YELLOW + "y, z" + ANSI_RESET + "'. Since there aren't enough letters to make 9 perfect groups, these two letters will represent the last letter of the code word.");
-        delayPrint();
+        waitOneSecond();
         String input = getStringInput("Why don't you try out using the code. Here, theres a door in front of you which allows you to access the elevators to the upper level of the space ship, why don't you try deciphering the word." +
                 "\nThe encrypted word is: " + ANSI_BLUE + "n3l3f3a1a2e1" + ANSI_RESET + ". \nInput your answer here: "); //frosty is the answer
 
@@ -340,22 +353,22 @@ public class Main {
             inputTwo = getStringInput(ANSI_RED + "Uh oh, it is the wrong answer. Try again: " + ANSI_RESET);
         }
         System.out.println("Perfect you've gotten a hang of it now!");
-        delayPrint();
+        waitOneSecond();
         System.out.println("uh oh... I think I'm glitching out... a hacker must've entered the system...");
-        delayPrint();
+        waitOneSecond();
         System.out.println("You need to help fix this, Yoshi is the hacker...she used to be a helper on this ship and knows the cipher too..., it'll be hard to beat her. Now that you're at the motherboard, you should be able to reset the system by encrypting and deciphering four sentences. However, the hacker is fast, so you only have 45 seconds to finish each task... hurry up!");
         System.out.println(ANSI_CYAN + ANSI_BOLD + "\nTask 1 - encrypt the sentence to access the motherboard: ");
         encryptWord("sentenceToEncrypt");
         System.out.println("Congrats you got into the motherboard system! Oh no, Yoshi sent you a message...");
-        delayPrint();
+        waitOneSecond();
         System.out.println(ANSI_YELLOW + ANSI_BOLD + "\nTask 2 - decipher this sentence: ");
         decipherWord("sentenceToDecipher");
         System.out.println("Yikes... You're almost there, right, you just need to encrypt this message to reset the system");
-        delayPrint();
+        waitOneSecond();
         System.out.println(ANSI_PURPLE + ANSI_BOLD + "\nTask 3 - encrypt this sentence: ");
         encryptWord("sentenceToEncrypt");
         System.out.println("Perfect, now you've reset the system, we should be good to go!");
-        delayPrint();
+        waitOneSecond();
         System.out.println("Oh look... one last message from Yoshi... I wonder what it says?");
         System.out.println(ANSI_GREEN + ANSI_BOLD + "\nTask 4 - decipher this sentence: ");
         decipherWord("sentenceToDecipher");
@@ -376,7 +389,6 @@ public class Main {
      *
      * @param filePath file to read
      */
-
 
     public static void encryptWord(String filePath) {
         List<String> list = readLinesFromFile(filePath);
@@ -401,7 +413,6 @@ public class Main {
         boolean userInput = promptForAnswer("Enter your answer: ", answerLine, 60);
         System.out.println(userInput ? ANSI_GREEN + "Correct!" + ANSI_RESET : ANSI_RED + "You have ran out of time.");
     }
-
 
     private static int previousDecipherIndex = -1; //Variable used to store the index of the line used in the first task
 
@@ -436,8 +447,12 @@ public class Main {
 
     }
 
-
-    public static List<String> readLinesFromFile(String filePath) { //Reads lines from the file
+    /**
+     * Reads lines from the file
+     * @param filePath file to read from
+     * @return list of strings from the file - each line is one string
+     */
+    public static List<String> readLinesFromFile(String filePath) {
         List<String> lines = new ArrayList<>();
 
         try {
@@ -456,7 +471,6 @@ public class Main {
 
         return lines;
     }
-
 
     public static List<String> getOddNumberedLines(List<String> lines) { //Reads a file and stores only the odd numbered lines
         List<String> oddLines = new ArrayList<>();
@@ -510,8 +524,7 @@ public class Main {
         }
     }
 
-
-    public static void delayPrint() { //This method is used to delay the printing of the next line to allow the user enough time to read the message.
+    public static void waitOneSecond() { //This method is used to delay the printing of the next line to allow the user enough time to read the message.
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
